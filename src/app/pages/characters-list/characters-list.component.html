@@ -1,6 +1,9 @@
 <ng-container *ngIf="vm$ | async as vm">
-  <main class="flex">
-    <app-characters-table [characters]="vm.characters"></app-characters-table>
+  <main class="flex flex-col gap-4 lg:w-10/12 w-4/5">
+    <app-characters-table
+      class="hidden md:block"
+      [characters]="vm.characters"
+    ></app-characters-table>
     <mat-paginator
       [length]="vm.total"
       [pageSize]="vm.limit"

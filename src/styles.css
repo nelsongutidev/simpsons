@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
   font-family: "simpsons";
   src: url("assets/fonts/simpsons.otf") format("opentype");
@@ -8,4 +12,8 @@ body,
 h1,
 .mat-mdc-table {
   font-family: "simpsons", sans-serif !important;
+}
+
+.mat-typography h1 {
+  @apply text-4xl my-8;
 }

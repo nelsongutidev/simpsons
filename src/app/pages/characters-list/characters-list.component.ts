@@ -30,7 +30,9 @@ export const CHARACTER_DISPLAYED_COLUMNS = [
     CharactersTableComponent,
   ],
   templateUrl: './characters-list.component.html',
-  styles: [],
+  host: {
+    class: 'flex justify-center items-center',
+  },
   providers: [CharactersListStore],
 })
 export class CharactersListComponent {
