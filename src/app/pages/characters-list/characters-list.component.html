@@ -1,44 +1,14 @@
 <ng-container *ngIf="vm$ | async as vm">
-  <table mat-table [dataSource]="vm.characters" class="mat-elevation-z8">
-    <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
-
-    <ng-container matColumnDef="Nombre">
-      <th mat-header-cell *matHeaderCellDef>Nombre</th>
-      <td mat-cell *matCellDef="let character">{{ character.Nombre }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="Estado">
-      <th mat-header-cell *matHeaderCellDef>Estado</th>
-      <td mat-cell *matCellDef="let character">{{ character.Estado }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="Genero">
-      <th mat-header-cell *matHeaderCellDef>Genero</th>
-      <td mat-cell *matCellDef="let character">{{ character.Genero }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="Historia">
-      <th mat-header-cell *matHeaderCellDef>Historia</th>
-      <td mat-cell *matCellDef="let character">{{ character.Historia }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="Ocupacion">
-      <th mat-header-cell *matHeaderCellDef>Ocupacion</th>
-      <td mat-cell *matCellDef="let character">{{ character.Ocupacion }}</td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
-
-  <mat-paginator
-    [length]="vm.total"
-    [pageSize]="vm.limit"
-    [pageIndex]="vm.page - 1"
-    (page)="onPageChange($event)"
-    showFirstLastButtons
-    aria-label="Select Page for Simpsons Characters Table"
-  >
-  </mat-paginator>
+  <main class="flex">
+    <app-characters-table [characters]="vm.characters"></app-characters-table>
+    <mat-paginator
+      [length]="vm.total"
+      [pageSize]="vm.limit"
+      [pageIndex]="vm.page - 1"
+      (page)="onPageChange($event)"
+      showFirstLastButtons
+      aria-label="Select Page for Simpsons Characters Table"
+    >
+    </mat-paginator>
+  </main>
 </ng-container>

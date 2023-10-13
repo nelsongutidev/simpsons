@@ -9,6 +9,7 @@ import {
   MatPaginatorModule,
   PageEvent,
 } from '@angular/material/paginator';
+import { CharactersTableComponent } from 'src/app/shared/components/characters-table/characters-table.component';
 
 export const CHARACTER_DISPLAYED_COLUMNS = [
   'Nombre',
@@ -22,7 +23,12 @@ export const CHARACTER_DISPLAYED_COLUMNS = [
 @Component({
   selector: 'app-characters-list',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatPaginatorModule],
+  imports: [
+    CommonModule,
+    MatTableModule,
+    MatPaginatorModule,
+    CharactersTableComponent,
+  ],
   templateUrl: './characters-list.component.html',
   styles: [],
   providers: [CharactersListStore],
@@ -31,7 +37,6 @@ export class CharactersListComponent {
   simpsonsService = inject(SimpsonsService);
   store = inject(CharactersListStore);
 
-  displayedColumns = CHARACTER_DISPLAYED_COLUMNS;
   vm$ = this.store.$vm;
 
   ngOnInit() {
