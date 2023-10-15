@@ -10,15 +10,7 @@ import {
   PageEvent,
 } from '@angular/material/paginator';
 import { CharactersTableComponent } from 'src/app/shared/components/characters-table/characters-table.component';
-
-export const CHARACTER_DISPLAYED_COLUMNS = [
-  'Nombre',
-  'Genero',
-  'Estado',
-  'Historia',
-  // 'Imagen',
-  'Ocupacion',
-];
+import { CharacterCardComponent } from 'src/app/shared/components/character-card/character-card.component';
 
 @Component({
   selector: 'app-characters-list',
@@ -28,6 +20,7 @@ export const CHARACTER_DISPLAYED_COLUMNS = [
     MatTableModule,
     MatPaginatorModule,
     CharactersTableComponent,
+    CharacterCardComponent,
   ],
   templateUrl: './characters-list.component.html',
   host: {

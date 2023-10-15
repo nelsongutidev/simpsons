@@ -2,7 +2,15 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { Character } from '../../models/character';
-import { CHARACTER_DISPLAYED_COLUMNS } from 'src/app/pages/characters-list/characters-list.component';
+
+export const CHARACTER_DISPLAYED_COLUMNS = [
+  'Nombre',
+  'Imagen',
+  'Genero',
+  'Estado',
+  // 'Historia',
+  'Ocupacion',
+];
 
 @Component({
   selector: 'app-characters-table',

@@ -1,9 +1,5 @@
 <ng-container *ngIf="vm$ | async as vm">
-  <main class="flex flex-col gap-4 lg:w-10/12 w-4/5">
-    <app-characters-table
-      class="hidden md:block"
-      [characters]="vm.characters"
-    ></app-characters-table>
+  <main class="flex flex-col gap-4 lg:w-10/12 w-4/5 mb-8">
     <mat-paginator
       [length]="vm.total"
       [pageSize]="vm.limit"
@@ -13,5 +9,17 @@
       aria-label="Select Page for Simpsons Characters Table"
     >
     </mat-paginator>
+    <section class="flex flex-wrap gap-4 justify-center">
+      <app-character-card
+        class="md:hidden"
+        *ngFor="let character of vm.characters"
+        [character]="character"
+      />
+    </section>
+
+    <app-characters-table
+      class="hidden md:block"
+      [characters]="vm.characters"
+    />
   </main>
 </ng-container>

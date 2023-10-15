@@ -7,6 +7,13 @@
     <td mat-cell *matCellDef="let character">{{ character.Nombre }}</td>
   </ng-container>
 
+  <ng-container matColumnDef="Imagen">
+    <th mat-header-cell *matHeaderCellDef>Imagen</th>
+    <td mat-cell *matCellDef="let character">
+      <img class="w-12 py-2" [src]="character.Imagen" alt="" />
+    </td>
+  </ng-container>
+
   <ng-container matColumnDef="Estado">
     <th mat-header-cell *matHeaderCellDef>Estado</th>
     <td mat-cell *matCellDef="let character">{{ character.Estado }}</td>
