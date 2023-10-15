@@ -11,8 +11,4 @@ export const routes: Routes = [
     path: 'characters',
     component: CharactersListComponent,
   },
-  {
-    path: '**',
-    redirectTo: 'characters',
-  },
 ];
