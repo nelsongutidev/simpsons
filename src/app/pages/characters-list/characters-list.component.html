@@ -1,6 +1,8 @@
 <ng-container *ngIf="vm$ | async as vm">
-  <main class="flex flex-col gap-4 lg:w-10/12 w-4/5 mb-8">
-    <div class="flex justify-between flex-wrap">
+  <main class="flex flex-col gap-4 mb-8 lg:w-3/5 md:w-4/5 w-full">
+    <div
+      class="flex md:justify-between justify-center flex-wrap w-full items-center"
+    >
       <mat-radio-group
         class="md:block hidden"
         color="primary"
@@ -23,7 +25,7 @@
 
     <section class="md:flex hidden flex-wrap gap-4 justify-center">
       <ng-container *ngIf="displayOption === 'table'; else listTemplate">
-        <app-characters-table [characters]="vm.characters" />
+        <app-characters-table class="w-full" [characters]="vm.characters" />
       </ng-container>
       <ng-template #listTemplate>
         <app-character-card
