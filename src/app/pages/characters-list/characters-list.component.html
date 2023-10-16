@@ -1,25 +1,41 @@
 <ng-container *ngIf="vm$ | async as vm">
   <main class="flex flex-col gap-4 lg:w-10/12 w-4/5 mb-8">
-    <mat-paginator
-      [length]="vm.total"
-      [pageSize]="vm.limit"
-      [pageIndex]="vm.page - 1"
-      (page)="onPageChange($event)"
-      showFirstLastButtons
-      aria-label="Select Page for Simpsons Characters Table"
-    >
-    </mat-paginator>
-    <section class="flex flex-wrap gap-4 justify-center">
+    <div class="flex justify-between flex-wrap">
+      <mat-radio-group
+        color="primary"
+        aria-label="Select an option"
+        [(ngModel)]="displayOption"
+      >
+        <mat-radio-button value="table">Table</mat-radio-button>
+        <mat-radio-button value="list">List</mat-radio-button>
+      </mat-radio-group>
+
+      <mat-paginator
+        [length]="vm.total"
+        [pageSize]="vm.limit"
+        [pageIndex]="vm.page - 1"
+        (page)="onPageChange($event)"
+        showFirstLastButtons
+        aria-label="Select Page for Simpsons Characters Table"
+      />
+    </div>
+
+    <section class="md:flex hidden flex-wrap gap-4 justify-center">
+      <ng-container *ngIf="displayOption === 'table'; else listTemplate">
+        <app-characters-table [characters]="vm.characters" />
+      </ng-container>
+      <ng-template #listTemplate>
+        <app-character-card
+          *ngFor="let character of vm.characters"
+          [character]="character"
+        />
+      </ng-template>
+    </section>
+    <section class="flex md:hidden flex-wrap gap-4 justify-center">
       <app-character-card
-        class="md:hidden"
         *ngFor="let character of vm.characters"
         [character]="character"
       />
     </section>
-
-    <app-characters-table
-      class="hidden md:block"
-      [characters]="vm.characters"
-    />
   </main>
 </ng-container>

@@ -11,7 +11,8 @@ import {
 } from '@angular/material/paginator';
 import { CharactersTableComponent } from 'src/app/shared/components/characters-table/characters-table.component';
 import { CharacterCardComponent } from 'src/app/shared/components/character-card/character-card.component';
-
+import { MatRadioModule } from '@angular/material/radio';
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-characters-list',
   standalone: true,
@@ -21,6 +22,8 @@ import { CharacterCardComponent } from 'src/app/shared/components/character-card
     MatPaginatorModule,
     CharactersTableComponent,
     CharacterCardComponent,
+    MatRadioModule,
+    FormsModule,
   ],
   templateUrl: './characters-list.component.html',
   host: {
@@ -33,6 +36,7 @@ export class CharactersListComponent {
   store = inject(CharactersListStore);
 
   vm$ = this.store.$vm;
+  displayOption = 'table';
 
   ngOnInit() {
     this.store.fetchCharacters();
