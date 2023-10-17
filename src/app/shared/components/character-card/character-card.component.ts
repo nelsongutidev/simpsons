@@ -1,6 +1,6 @@
 import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Character } from '../../models/character';
+import { Character } from '@shared/models/character';
 import { MatDialog } from '@angular/material/dialog';
 import { CharacterDialogComponent } from '../character-dialog/character-dialog.component';
 

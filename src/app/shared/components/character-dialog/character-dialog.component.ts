@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Character } from '../../models/character';
+import { Character } from '@shared/models/character';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 export interface DialogData {

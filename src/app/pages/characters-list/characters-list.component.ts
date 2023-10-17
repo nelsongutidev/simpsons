@@ -1,12 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SimpsonsService } from 'src/app/shared/services/simpsons.service';
+import { SimpsonsService } from '@shared/services/simpsons.service';
 
 import { CharactersListStore } from './characters-list-store.store';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
-import { CharactersTableComponent } from 'src/app/shared/components/characters-table/characters-table.component';
-import { CharacterCardComponent } from 'src/app/shared/components/character-card/character-card.component';
+import { CharactersTableComponent } from '@shared/components/characters-table/characters-table.component';
+import { CharacterCardComponent } from '@shared/components/character-card/character-card.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { FormsModule } from '@angular/forms';
 @Component({
