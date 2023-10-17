@@ -17,3 +17,11 @@ h1,
 .mat-typography h1 {
   @apply text-4xl my-8;
 }
+
+.mat-mdc-row:hover {
+  @apply bg-gray-100 cursor-pointer;
+}
+
+p {
+  @apply font-mono;
+}

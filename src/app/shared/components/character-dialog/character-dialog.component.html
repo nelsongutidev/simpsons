@@ -1,0 +1,18 @@
+<ng-container *ngIf="character">
+  <div class="p-6">
+    <div class="flex justify-center h-48 py-4">
+      <img
+        class="max-w-xs"
+        [src]="character.Imagen"
+        alt="Sunset in the mountains"
+      />
+    </div>
+
+    <div class="">
+      <div class="font-bold text-xl mb-2">{{ character.Nombre }}</div>
+      <p class="text-gray-700 text-base">
+        {{ character.Historia }}
+      </p>
+    </div>
+  </div>
+</ng-container>
