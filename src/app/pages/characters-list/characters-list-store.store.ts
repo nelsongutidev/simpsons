@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
-import { switchMap, tap, combineLatest, withLatestFrom } from 'rxjs';
+import { switchMap, tap, withLatestFrom } from 'rxjs';
 import { Character } from 'src/app/shared/models/character';
 import { CharactersDto } from 'src/app/shared/models/character-dto';
 import { SimpsonsService } from 'src/app/shared/services/simpsons.service';

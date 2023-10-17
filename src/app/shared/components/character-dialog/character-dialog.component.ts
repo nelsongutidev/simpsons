@@ -12,7 +12,6 @@ export interface DialogData {
   standalone: true,
   imports: [CommonModule],
   templateUrl: './character-dialog.component.html',
-  styles: [],
 })
 export class CharacterDialogComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {}

@@ -2,11 +2,7 @@ import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { Character } from '../../models/character';
-import {
-  MatDialog,
-  MatDialogRef,
-  MatDialogModule,
-} from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { CharacterDialogComponent } from '../character-dialog/character-dialog.component';
 
 export const CHARACTER_DISPLAYED_COLUMNS = [
@@ -23,7 +19,6 @@ export const CHARACTER_DISPLAYED_COLUMNS = [
   standalone: true,
   imports: [CommonModule, MatTableModule, MatDialogModule],
   templateUrl: './characters-table.component.html',
-  styles: [],
 })
 export class CharactersTableComponent {
   dialog: MatDialog = inject(MatDialog);
