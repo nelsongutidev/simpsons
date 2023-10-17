@@ -12,6 +12,9 @@ export interface DialogData {
   standalone: true,
   imports: [CommonModule],
   templateUrl: './character-dialog.component.html',
+  host: {
+    class: 'block p-6 md:max-h-full max-h-[32rem] overflow-y-auto',
+  },
 })
 export class CharacterDialogComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {}

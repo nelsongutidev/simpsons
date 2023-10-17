@@ -9,8 +9,8 @@
         aria-label="Select an option"
         [(ngModel)]="displayOption"
       >
-        <mat-radio-button value="table">Table</mat-radio-button>
         <mat-radio-button value="list">List</mat-radio-button>
+        <mat-radio-button value="grid">Grid</mat-radio-button>
       </mat-radio-group>
 
       <mat-paginator
@@ -24,10 +24,10 @@
     </div>
 
     <section class="md:flex hidden flex-wrap gap-4 justify-center">
-      <ng-container *ngIf="displayOption === 'table'; else listTemplate">
+      <ng-container *ngIf="displayOption === 'list'; else gridTemplate">
         <app-characters-table class="w-full" [characters]="vm.characters" />
       </ng-container>
-      <ng-template #listTemplate>
+      <ng-template #gridTemplate>
         <app-character-card
           *ngFor="let character of vm.characters"
           [character]="character"

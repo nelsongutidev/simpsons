@@ -32,7 +32,7 @@ export class CharactersListComponent {
   store = inject(CharactersListStore);
 
   vm$ = this.store.$vm;
-  displayOption = 'table';
+  displayOption: 'list' | 'grid' = 'list';
 
   ngOnInit() {
     this.store.fetchCharacters();

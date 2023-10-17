@@ -11,7 +11,7 @@ import { CharacterDialogComponent } from '../character-dialog/character-dialog.c
   templateUrl: './character-card.component.html',
   host: {
     class:
-      'w-64 h-96 rounded overflow-hidden shadow-lg space-y-2 px-4 hover:bg-gray-100 cursor-pointer',
+      'md:w-64 w-72 h-96 rounded overflow-hidden shadow-lg space-y-2 px-4 hover:bg-gray-100 cursor-pointer',
     '(click)': 'openDialog(character)',
   },
 })

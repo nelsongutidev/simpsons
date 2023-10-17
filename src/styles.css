@@ -25,3 +25,7 @@ h1,
 p {
   @apply font-mono;
 }
+
+.mat-mdc-paginator-container {
+  @apply md:justify-end justify-center !important;
+}
