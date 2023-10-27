@@ -1,44 +1,52 @@
 <ng-container *ngIf="vm$ | async as vm">
-  <main class="flex flex-col gap-4 mb-12 lg:w-3/5 md:w-4/5 w-full">
-    <div
-      class="flex md:justify-between justify-center flex-wrap w-full items-center"
-    >
-      <mat-radio-group
-        class="md:block hidden"
-        color="primary"
-        aria-label="Select an option"
-        [(ngModel)]="displayOption"
+  <ng-container *ngIf="!vm.loading; else loadingTpl">
+    <main class="flex flex-col gap-4 mb-12 lg:w-3/5 md:w-4/5 w-full">
+      <div
+        class="flex md:justify-between justify-center flex-wrap w-full items-center"
       >
-        <mat-radio-button value="list">List</mat-radio-button>
-        <mat-radio-button value="grid">Grid</mat-radio-button>
-      </mat-radio-group>
+        <mat-radio-group
+          class="md:block hidden"
+          color="primary"
+          aria-label="Select an option"
+          [(ngModel)]="displayOption"
+        >
+          <mat-radio-button value="list">List</mat-radio-button>
+          <mat-radio-button value="grid">Grid</mat-radio-button>
+        </mat-radio-group>
 
-      <mat-paginator
-        [length]="vm.total"
-        [pageSize]="vm.limit"
-        [pageIndex]="vm.page - 1"
-        (page)="onPageChange($event)"
-        showFirstLastButtons
-        aria-label="Select Page for Simpsons Characters Table"
-      />
-    </div>
+        <mat-paginator
+          [length]="vm.total"
+          [pageSize]="vm.limit"
+          [pageIndex]="vm.page - 1"
+          (page)="onPageChange($event)"
+          showFirstLastButtons
+          aria-label="Select Page for Simpsons Characters Table"
+        />
+      </div>
 
-    <section class="md:flex hidden flex-wrap gap-4 justify-center">
-      <ng-container *ngIf="displayOption === 'list'; else gridTemplate">
-        <app-characters-table class="w-full" [characters]="vm.characters" />
-      </ng-container>
-      <ng-template #gridTemplate>
+      <section class="md:flex hidden flex-wrap gap-4 justify-center">
+        <ng-container *ngIf="displayOption === 'list'; else gridTemplate">
+          <app-characters-table class="w-full" [characters]="vm.characters" />
+        </ng-container>
+        <ng-template #gridTemplate>
+          <app-character-card
+            *ngFor="let character of vm.characters"
+            [character]="character"
+          />
+        </ng-template>
+      </section>
+      <section class="flex md:hidden flex-wrap gap-4 justify-center">
         <app-character-card
           *ngFor="let character of vm.characters"
           [character]="character"
         />
-      </ng-template>
-    </section>
-    <section class="flex md:hidden flex-wrap gap-4 justify-center">
-      <app-character-card
-        *ngFor="let character of vm.characters"
-        [character]="character"
-      />
-    </section>
-  </main>
+      </section>
+    </main>
+  </ng-container>
+
+  <ng-template #loadingTpl>
+    <div class="h-[80vh] flex items-center">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>
 </ng-container>

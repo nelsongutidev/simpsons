@@ -9,6 +9,8 @@ import { CharactersTableComponent } from '@shared/components/characters-table/ch
 import { CharacterCardComponent } from '@shared/components/character-card/character-card.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { FormsModule } from '@angular/forms';
+import { A11yModule } from '@angular/cdk/a11y';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @Component({
   selector: 'app-characters-list',
   standalone: true,
@@ -20,6 +22,8 @@ import { FormsModule } from '@angular/forms';
     CharacterCardComponent,
     MatRadioModule,
     FormsModule,
+    A11yModule,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './characters-list.component.html',
   host: {

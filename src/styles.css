@@ -8,10 +8,17 @@
   src: url("assets/fonts/simpsons.otf") format("opentype");
 }
 
-body,
 h1,
-.mat-mdc-table {
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: "simpsons", sans-serif !important;
+}
+
+h3 {
+  @apply text-xl !important;
 }
 
 .mat-typography h1 {
@@ -20,10 +27,6 @@ h1,
 
 .mat-mdc-row:hover {
   @apply bg-gray-100 cursor-pointer;
-}
-
-p {
-  @apply font-mono;
 }
 
 .mat-mdc-paginator-container {
