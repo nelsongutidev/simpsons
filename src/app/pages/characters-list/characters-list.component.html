@@ -15,6 +15,7 @@
         </mat-radio-group>
 
         <mat-paginator
+          *ngIf="vm.filterValue?.length === 0"
           [length]="vm.total"
           [pageSize]="vm.limit"
           [pageIndex]="vm.page - 1"
@@ -23,6 +24,17 @@
           aria-label="Select Page for Simpsons Characters Table"
         />
       </div>
+
+      <mat-form-field class="md:px-0 px-8">
+        <mat-label>Filter</mat-label>
+        <input
+          matInput
+          (keyup)="applyFilter($event)"
+          placeholder="Ex. Mia"
+          #input
+          [(ngModel)]="vm.filterValue"
+        />
+      </mat-form-field>
 
       <section class="md:flex hidden flex-wrap gap-4 justify-center">
         <ng-container *ngIf="displayOption === 'list'; else gridTemplate">

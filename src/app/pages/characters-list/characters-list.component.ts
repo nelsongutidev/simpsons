@@ -11,6 +11,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { FormsModule } from '@angular/forms';
 import { A11yModule } from '@angular/cdk/a11y';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 @Component({
   selector: 'app-characters-list',
   standalone: true,
@@ -24,6 +26,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     FormsModule,
     A11yModule,
     MatProgressSpinnerModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   templateUrl: './characters-list.component.html',
   host: {
@@ -45,5 +49,10 @@ export class CharactersListComponent {
   onPageChange(pageEvent: PageEvent) {
     this.store.setPage(pageEvent.pageIndex + 1);
     this.store.fetchCharacters();
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.store.findCharacters(filterValue);
   }
 }

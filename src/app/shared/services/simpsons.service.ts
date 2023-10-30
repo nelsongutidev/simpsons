@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
-import { CharactersDto } from '../models/character-dto';
+import { CharactersDto, FindCharactersDto } from '../models/character-dto';
+import { Character } from '../models/character';
 const baseUrl = 'https://apisimpsons.fly.dev/api/personajes';
 
 @Injectable({
@@ -19,5 +20,11 @@ export class SimpsonsService {
         },
       })
       .pipe(map((data: CharactersDto) => data));
+  }
+
+  findCharacters(filterValue: string): Observable<Character[]> {
+    return this.http
+      .get<FindCharactersDto>(`${baseUrl}/find/${filterValue}`)
+      .pipe(map((data) => data.result));
   }
 }

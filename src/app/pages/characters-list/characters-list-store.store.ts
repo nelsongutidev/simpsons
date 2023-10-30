@@ -1,6 +1,14 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
-import { switchMap, tap, withLatestFrom } from 'rxjs';
+import {
+  Observable,
+  debounce,
+  debounceTime,
+  filter,
+  switchMap,
+  tap,
+  withLatestFrom,
+} from 'rxjs';
 import { Character } from '@shared/models/character';
 import { CharactersDto } from '@shared/models/character-dto';
 import { SimpsonsService } from '@shared/services/simpsons.service';
@@ -11,6 +19,7 @@ interface CharactersState {
   page: number;
   total: number;
   loading?: boolean;
+  filterValue?: string;
 }
 
 const initialState: CharactersState = {
@@ -19,6 +28,7 @@ const initialState: CharactersState = {
   page: 1,
   total: 0,
   loading: false,
+  filterValue: '',
 };
 
 @Injectable()
@@ -31,6 +41,7 @@ export class CharactersListStore extends ComponentStore<CharactersState> {
   private readonly page$ = this.select((state) => state.page);
   private readonly total$ = this.select((state) => state.total);
   private readonly loading$ = this.select((state) => state.loading);
+  private readonly filterValue$ = this.select((state) => state.filterValue);
 
   $vm = this.select(
     this.characters$,
@@ -38,12 +49,14 @@ export class CharactersListStore extends ComponentStore<CharactersState> {
     this.page$,
     this.total$,
     this.loading$,
-    (characters, limit, page, total, loading) => ({
+    this.filterValue$,
+    (characters, limit, page, total, loading, filterValue) => ({
       characters,
       limit,
       page,
       total,
       loading,
+      filterValue,
     })
   );
 
@@ -72,8 +85,13 @@ export class CharactersListStore extends ComponentStore<CharactersState> {
     loading,
   }));
 
-  fetchCharacters = this.effect((trigger$) =>
-    trigger$.pipe(
+  readonly setFilterValue = this.updater((state, filterValue: string) => ({
+    ...state,
+    filterValue,
+  }));
+
+  readonly fetchCharacters = this.effect(($) =>
+    $.pipe(
       tap(() => this.setLoading(true)),
       withLatestFrom(this.limit$, this.page$),
       switchMap(([_, limit, page]) =>
@@ -87,6 +105,28 @@ export class CharactersListStore extends ComponentStore<CharactersState> {
         )
       ),
       tap(() => this.setLoading(false))
+    )
+  );
+
+  readonly findCharacters = this.effect((filterValue$: Observable<string>) =>
+    filterValue$.pipe(
+      debounceTime(500),
+      tap((filterValue) => {
+        this.setFilterValue(filterValue);
+        if (filterValue.length === 0) {
+          this.fetchCharacters();
+        }
+      }),
+      filter((filterValue) => filterValue.length > 0),
+      tap(() => this.setLoading(true)),
+      switchMap((filterValue) =>
+        this.simpsonsService.findCharacters(filterValue).pipe(
+          tap((characters: Character[]) => {
+            this.setLoading(false);
+            this.patchState({ ...initialState, characters, filterValue });
+          })
+        )
+      )
     )
   );
 }

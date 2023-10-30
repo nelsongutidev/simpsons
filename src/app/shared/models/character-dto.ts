@@ -12,3 +12,7 @@ export interface CharactersDto {
   totalDocs: number;
   totalPages: number;
 }
+
+export interface FindCharactersDto {
+  result: Character[];
+}
