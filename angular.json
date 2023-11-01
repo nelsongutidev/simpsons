@@ -68,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "simpsons:build:production"
+              "buildTarget": "simpsons:build:production"
             },
             "development": {
-              "browserTarget": "simpsons:build:development"
+              "buildTarget": "simpsons:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "simpsons:build"
+            "buildTarget": "simpsons:build"
           }
         },
         "test": {
