@@ -1,88 +1,78 @@
 @if (vm$ | async; as vm) {
 
-  <main class="flex flex-col gap-4 mb-12 lg:w-3/5 md:w-4/5 w-full">
-    <div
-      class="flex md:justify-between justify-center flex-wrap w-full items-center"
+<main class="flex flex-col gap-4 mb-12 lg:w-3/5 md:w-4/5 w-full">
+  <div
+    class="flex md:justify-between justify-center flex-wrap w-full items-center"
+  >
+    <mat-radio-group
+      class="md:block hidden"
+      color="primary"
+      aria-label="Select an option"
+      [(ngModel)]="displayOption"
     >
-      <mat-radio-group
-        class="md:block hidden"
-        color="primary"
-        aria-label="Select an option"
-        [(ngModel)]="displayOption"
-      >
-        <mat-radio-button value="list">List</mat-radio-button>
-        <mat-radio-button value="grid">Grid</mat-radio-button>
-      </mat-radio-group>
+      <mat-radio-button value="list">List</mat-radio-button>
+      <mat-radio-button value="grid">Grid</mat-radio-button>
+    </mat-radio-group>
 
-      @if (vm.filterValue?.length === 0) {
-<mat-paginator
-       
-        [length]="vm.total"
-        [pageSize]="vm.limit"
-        [pageIndex]="vm.page - 1"
-        (page)="onPageChange($event)"
-        showFirstLastButtons
-        aria-label="Select Page for Simpsons Characters Table"
-      />
-}
-    </div>
+    @if (vm.filterValue?.length === 0) {
+    <mat-paginator
+      [length]="vm.total"
+      [pageSize]="vm.limit"
+      [pageIndex]="vm.page - 1"
+      (page)="onPageChange($event)"
+      showFirstLastButtons
+      aria-label="Select Page for Simpsons Characters Table"
+    />
+    }
+  </div>
 
-    <mat-form-field class="md:px-0 px-8">
-      <mat-label>Busca Personajes</mat-label>
-      <input
-        matInput
-        (keyup)="applyFilter($event)"
-        placeholder="Ejemplo: Bart"
-        #input
-        [(ngModel)]="vm.filterValue"
-      />
-    </mat-form-field>
-    @if (!vm.loading) {
+  <mat-form-field class="md:px-0 px-8">
+    <mat-label>Busca Personajes</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Ejemplo: Bart"
+      #input
+      [(ngModel)]="vm.filterValue"
+    />
+  </mat-form-field>
+  @if (!vm.loading) { @if (vm.characters.length > 0) {
 
-      @if (vm.characters.length > 0) {
+  <section class="md:flex hidden flex-wrap gap-4 justify-center">
+    @if (displayOption === 'list') {
 
-        <section class="md:flex hidden flex-wrap gap-4 justify-center">
-          @if (displayOption === 'list') {
+    <app-characters-table class="w-full" [characters]="vm.characters" />
 
-            <app-characters-table class="w-full" [characters]="vm.characters" />
-          
-} @else {
+    } @else { @for (character of vm.characters; track character) {
+    <app-character-card [character]="character" />
+    } @empty{
+    <ng-container *ngTemplateOutlet="noCharactersTpl"></ng-container>} }
+  </section>
 
-            @for (character of vm.characters; track character) {
-  <app-character-card
-             
-              [character]="character"
-            />
-}
-          
-}
-                  </section>
-        <section class="flex md:hidden flex-wrap gap-4 justify-center">
-          @for (character of vm.characters; track character) {
-  <app-character-card
-           
-            [character]="character"
-          />
-}
-        </section>
-      
-} @else {
+  <section class="flex md:hidden flex-wrap gap-4 justify-center">
+    @for (character of vm.characters; track character) {
+    <app-character-card [character]="character" />
+    } @empty{
+    <ng-container *ngTemplateOutlet="noCharactersTpl"></ng-container>
 
-        <div class="h-[60vh] flex items-center justify-center">
-          <p class="text-2xl text-center">
-            No hay personajes de los Simpsons con ese nombre
-          </p>
-        </div>
-      
-}
-          
-} @else {
+    }
+  </section>
 
-    <div class="h-[60vh] flex items-center justify-center">
-      <mat-spinner></mat-spinner>
-    </div>
-  
-}
-  </main>
-  
+  } } @else {
+
+  <div class="h-[60vh] flex items-center justify-center">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  }
+</main>
+
+<ng-template #noCharactersTpl>
+  <div class="h-[60vh] flex items-center justify-center">
+    <p class="text-2xl text-center">
+      No hay personajes de los Simpsons con ese nombre
+    </p>
+  </div>
+</ng-template>
+
 }
