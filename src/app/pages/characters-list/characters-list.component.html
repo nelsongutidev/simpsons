@@ -1,4 +1,5 @@
-<ng-container *ngIf="vm$ | async as vm">
+@if (vm$ | async; as vm) {
+
   <main class="flex flex-col gap-4 mb-12 lg:w-3/5 md:w-4/5 w-full">
     <div
       class="flex md:justify-between justify-center flex-wrap w-full items-center"
@@ -13,8 +14,9 @@
         <mat-radio-button value="grid">Grid</mat-radio-button>
       </mat-radio-group>
 
-      <mat-paginator
-        *ngIf="vm.filterValue?.length === 0"
+      @if (vm.filterValue?.length === 0) {
+<mat-paginator
+       
         [length]="vm.total"
         [pageSize]="vm.limit"
         [pageIndex]="vm.page - 1"
@@ -22,6 +24,7 @@
         showFirstLastButtons
         aria-label="Select Page for Simpsons Characters Table"
       />
+}
     </div>
 
     <mat-form-field class="md:px-0 px-8">
@@ -34,38 +37,52 @@
         [(ngModel)]="vm.filterValue"
       />
     </mat-form-field>
-    <ng-container *ngIf="!vm.loading; else loadingTpl">
-      <ng-container *ngIf="vm.characters.length > 0; else noResultsTpl">
+    @if (!vm.loading) {
+
+      @if (vm.characters.length > 0) {
+
         <section class="md:flex hidden flex-wrap gap-4 justify-center">
-          <ng-container *ngIf="displayOption === 'list'; else gridTemplate">
+          @if (displayOption === 'list') {
+
             <app-characters-table class="w-full" [characters]="vm.characters" />
-          </ng-container>
-          <ng-template #gridTemplate>
-            <app-character-card
-              *ngFor="let character of vm.characters"
+          
+} @else {
+
+            @for (character of vm.characters; track character) {
+  <app-character-card
+             
               [character]="character"
             />
-          </ng-template>
-        </section>
+}
+          
+}
+                  </section>
         <section class="flex md:hidden flex-wrap gap-4 justify-center">
-          <app-character-card
-            *ngFor="let character of vm.characters"
+          @for (character of vm.characters; track character) {
+  <app-character-card
+           
             [character]="character"
           />
+}
         </section>
-      </ng-container>
-      <ng-template #noResultsTpl>
+      
+} @else {
+
         <div class="h-[60vh] flex items-center justify-center">
           <p class="text-2xl text-center">
             No hay personajes de los Simpsons con ese nombre
           </p>
         </div>
-      </ng-template>
-    </ng-container>
-  </main>
-  <ng-template #loadingTpl>
+      
+}
+          
+} @else {
+
     <div class="h-[60vh] flex items-center justify-center">
       <mat-spinner></mat-spinner>
     </div>
-  </ng-template>
-</ng-container>
+  
+}
+  </main>
+  
+}
